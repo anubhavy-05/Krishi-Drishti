@@ -5,28 +5,34 @@ A machine learning-based application that predicts crop prices for various crops
 This Python application uses a Random Forest regression model to predict crop prices based on historical data, rainfall, and market demand. The system supports multiple crops across different states and provides an interactive command-line interface for predictions.
 
 # Features
-- Predicts prices for 8 different crops across various Indian states
+- 🎯 Multi-crop Support: Predicts prices for 8 different crops
 
-- State-specific models for accurate regional predictions
+- 🗺️ State-specific Models: Trains separate models for each crop-state combination
 
-- Interactive command-line interface
+- 📊 Interactive Interface: User-friendly command-line interface for predictions
 
-- Automated data generation for demonstration
+- 🔄 Data Generation: Automatically creates placeholder data for demonstration
 
-- Model persistence and management
+- 💾 Model Persistence: Saves trained models for future use
 
-# Supported Crops and States
+- 📈 Time-series Features: Incorporates temporal patterns in pricing data
 
-This document lists the crops and the corresponding Indian states that support them.
+- 🧹 Auto-cleanup: Removes generated files after session completion
 
-| Crop      | Supported States                            |
-|-----------|---------------------------------------------|
-| Wheat     | Uttar Pradesh, Punjab, Madhya Pradesh       |
-| Paddy     | West Bengal, Punjab, Uttar Pradesh          |
-| Sugarcane | Uttar Pradesh, Maharashtra                  |
-| Maize     | Madhya Pradesh, Uttar Pradesh               |
-| Arhar     | Maharashtra, Madhya Pradesh, Uttar Pradesh  |
-| Moong     | Rajasthan, Madhya Pradesh                   |
+# Crop Price Prediction System Overview
+
+This document provides an overview of supported crops, their corresponding states, and their base prices.
+
+| Crop      | Supported States                            | Base Price (₹/quintal) |
+|-----------|---------------------------------------------|------------------------|
+| Wheat     | Uttar Pradesh, Punjab, Madhya Pradesh       | 2,125                  |
+| Paddy     | West Bengal, Punjab, Uttar Pradesh          | 2,040                  |
+| Sugarcane | Uttar Pradesh, Maharashtra                  | 350                    |
+| Maize     | Madhya Pradesh, Uttar Pradesh               | 1,962                  |
+| Arhar     | Maharashtra, Madhya Pradesh, Uttar Pradesh  | 6,300                  |
+| Moong     | Rajasthan, Madhya Pradesh                   | 6,800                  |
+| Cotton    | Gujarat, Maharashtra, Punjab                | 7,500                  |
+| Mustard   | Rajasthan, Madhya Pradesh                   | 5,500                  |
 # Installation
 1. Ensure you have Python 3.7+ installed
 
@@ -115,5 +121,8 @@ Provide rainfall (in mm) and demand values
 
 # License
 This project is for educational/demonstration purposes.
+# Disclaimer
+This software uses synthetic data and is for demonstration purposes only. Predictions should not be used for actual agricultural decision-making without validation against real data and expert consultation.
 
+For questions or suggestions regarding this implementation, please ensure you have reviewed the documentation above thoroughly.
 
