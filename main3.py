@@ -16,7 +16,7 @@ def create_placeholder_data(file_path):
     date_range = pd.date_range(start='2020-01-01', periods=1000, freq='D')
     df_placeholder = pd.DataFrame({
         'Date': date_range,
-        'Price': np.random.rand(1000) * 100 + 1000,
+        'Price': np.random.rand(1000) * 100 + 1000 + np.sin(np.arange(1000)/50)*20, # Added a little seasonality
         'Rainfall': np.random.rand(1000) * 50,
         'Demand': np.random.rand(1000) * 200 + 500
     })
@@ -25,7 +25,8 @@ def create_placeholder_data(file_path):
 
 def train_and_evaluate_crop_model(crop_name, file_path):
     """
-    Trains a price prediction model for a specific crop and evaluates its performance.
+    Trains a price prediction model for a specific crop, evaluates its performance,
+    and visualizes the results.
 
     Args:
         crop_name (str): The name of the crop (e.g., 'Paddy', 'Maize').
@@ -43,43 +44,31 @@ def train_and_evaluate_crop_model(crop_name, file_path):
         print("Skipping this crop. Please ensure your data file exists.")
         return
 
-    # Check for essential columns
     required_cols = ['Date', 'Price', 'Rainfall', 'Demand']
     if not all(col in df.columns for col in required_cols):
         print(f"Error: The file for {crop_name} must contain 'Date', 'Price', 'Rainfall', and 'Demand' columns.")
         return
 
-    # Convert the 'Date' column to datetime and set it as the index
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)
 
-    # Display the first few rows and data info
     print("\nFirst 5 rows of the data:")
     print(df.head())
-    print("\nData Info:")
-    print(df.info())
-
+    
     # --- 2. Feature Engineering ---
     print("\nStep 2: Feature Engineering...")
-    # Create time-based features
     df['month'] = df.index.month
     df['day_of_week'] = df.index.dayofweek
-
-    # Create a rolling moving average feature
     df['moving_average_7_day'] = df['Price'].rolling(window=7).mean()
-
-    # Drop rows with NaN values created by the moving average
     df.dropna(inplace=True)
     print("Features created and rows with NaN values dropped.")
 
     # --- 3. Data Splitting ---
     print("\nStep 3: Splitting Data into Training and Testing Sets...")
-    # Define features (X) and target (y)
     features = ['Rainfall', 'Demand', 'month', 'day_of_week', 'moving_average_7_day']
     X = df[features]
     y = df['Price']
 
-    # Use a random split for simplicity
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     print(f"Training set size: {X_train.shape[0]} samples")
     print(f"Test set size: {X_test.shape[0]} samples")
@@ -100,19 +89,31 @@ def train_and_evaluate_crop_model(crop_name, file_path):
 
     # --- 6. Displaying the Results in a Table ---
     print("\nStep 6: Displaying the Results in a Table...")
-    # Create a DataFrame for easy viewing of actual vs. predicted values
     results_df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
     results_df.sort_index(inplace=True)
-    # Print the DataFrame to the console
-    print(results_df)
+    print(results_df.head(10)) # Print just the head to keep the console clean
 
-    print("\nProcess completed.")
+    # --- 7. Visualization (NEWLY ADDED SECTION) ---
+    print("\nStep 7: Plotting the Results...")
+    plt.figure(figsize=(15, 7))
+    plt.plot(results_df.index, results_df['Actual'], label='Actual Price', color='blue', marker='.', linestyle='None')
+    plt.plot(results_df.index, results_df['Predicted'], label='Predicted Price', color='red')
+    
+    plt.title(f'Price Prediction for {crop_name}', fontsize=16)
+    plt.xlabel('Date', fontsize=12)
+    plt.ylabel('Price', fontsize=12)
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout() # Adjusts plot to prevent labels from being cut off
+    
+    # Display the plot
+    plt.show()
+
+    print("\nProcess completed for this crop.")
 
 
 # --- Main execution loop for different crops ---
 if __name__ == "__main__":
-    # Define the crops and their respective (placeholder) file paths
-    # In a real scenario, you would replace these with your actual data files.
     crop_data_files = {
         'Wheat': 'wheat_price_data.csv',
         'Paddy': 'paddy_price_data.csv',
@@ -124,16 +125,13 @@ if __name__ == "__main__":
         'Sugarcane': 'sugarcane_price_data.csv'
     }
 
-    # Generate placeholder data for all crops
     for file in crop_data_files.values():
         create_placeholder_data(file)
 
-    # Loop through each crop and run the model
     for crop, file in crop_data_files.items():
         train_and_evaluate_crop_model(crop, file)
         print("\n" + "="*70 + "\n")
 
-    # Clean up the generated placeholder files
     print("Cleaning up placeholder files...")
     for file in crop_data_files.values():
         if os.path.exists(file):
