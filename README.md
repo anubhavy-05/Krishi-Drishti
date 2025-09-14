@@ -34,22 +34,24 @@ This document provides an overview of supported crops, their corresponding state
 | Cotton    | Gujarat, Maharashtra, Punjab                | 7,500                  |
 | Mustard   | Rajasthan, Madhya Pradesh                   | 5,500                  |
 # Installation
-1. Ensure you have Python 3.7+ installed
+1. **Ensure you have Python 3.7+ installed**
 
-2. Install the required dependencies:
+2. **Install the required dependencies:**
 
-bash
+``` bash
 
 pip install pandas numpy scikit-learn joblib
+```
 
 # Usage
-1.Run the application:
+1.**Run the application:**
 
-bash
+```bash
 python crop_price_prediction.py
-2.Follow the interactive prompts:
+```
+2.**Follow the interactive prompts:**
 
-Select a crop from the available options
+ Select a crop from the available options
 
 Choose a state where that crop is supported
 
@@ -57,9 +59,9 @@ Enter a prediction date in YYYY-MM-DD format
 
 Provide rainfall (in mm) and demand values
 
-3.The system will display the predicted price in ₹ per quintal
+3.**The system will display the predicted price in ₹ per quintal**
 
-4.Type 'quit' to exit the program
+4.**Type 'quit' to exit the program**
 
 # How It Works
 ## Data Generation
