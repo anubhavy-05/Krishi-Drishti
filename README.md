@@ -3,6 +3,34 @@ A machine learning-based application that predicts crop prices for various crops
 
 # Overview
 This Python application uses a Random Forest regression model to predict crop prices based on historical data, rainfall, and market demand. The system supports multiple crops across different states and provides an interactive command-line interface for predictions.
+## 🎯 Objectives  
+
+Main objective:  **ML model design and deploy** a machine learning model that  **predict future market price of sfecific agricultural commodities**   
+
+### Sub-objectives:  
+- 📊 **Data Aggregation**: To collect and consolidate a comprehensive dataset from various sources, including historical market prices, weather data, crop production statistics, and economic indicators.  
+- ⚙️ **Feature Engineering**: To identify and engineer the most influential features that drive price fluctuations in agricultural commodities..  
+- 🤖 **Model Development**: To train, test, and evaluate multiple machine learning algorithms to find the most accurate and reliable model for price forecasting.  
+- 🔗 **System Implementation**: To create a functional pipeline from data ingestion to prediction output, which can be accessed through a user-friendly interface or an API.  
+- 💡 **Actionable Insights**: To provide predictions that help farmers decide the best time to sell their produce, assist traders in making informed purchasing decisions, and aid policymakers in managing food security.  
+
+---
+
+## 📍 Scope 
+-The scope of this project defines the boundaries and specific deliverables.
+
+### ✅ In-Scope:  
+- **Commodities**: The model will initially focus on a select set of major commodities relevant to the Indian context, such as Wheat, Rice, Pulses (e.g., Tur), and Onions. The framework will be designed to be extensible to other commodities. 
+- **Region**: Indian mandis (Agmarknet data).  
+- **Prediction Horizon**:The model will focus on short-to-medium term predictions, ranging from 7 days to 30 days in advance. This is the most critical timeframe for farmers and local traders.  
+- **Users**: Farmers, traders, cooperatives, govt. departments.  
+
+### ❌ Out-of-Scope:  
+- Automated trading system.  
+- Global exchange price predictions.  
+- Black swan events (pandemic, war, etc.).  
+
+---
 
 # Features
 - 🎯 Multi-crop Support: Predicts prices for 8 different crops
