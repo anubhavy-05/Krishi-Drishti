@@ -89,8 +89,10 @@ Provide rainfall (in mm) and demand values
 
 - Returns a price prediction based on the trained model
 - ## Run and Script ##
-- to run this code we have to  use vs code
-- `` main.py``
+- to run this code we have to  use vs code `main.py`script from terminal:
+ ```bash
+ python main.py
+ ```
 
 #  File Structure
 - crop_price_prediction.py - Main application file
