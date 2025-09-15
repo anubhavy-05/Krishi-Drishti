@@ -88,6 +88,9 @@ Provide rainfall (in mm) and demand values
 - Processes input features (date, rainfall, demand)
 
 - Returns a price prediction based on the trained model
+- ## Run and Script ##
+- to run this code we have to  use vs code
+- `` main.py``
 
 #  File Structure
 - crop_price_prediction.py - Main application file
