@@ -47,8 +47,8 @@ function addScrollAnimations() {
         });
     }, observerOptions);
     
-    // Observe all cards and sections
-    document.querySelectorAll('.card, .feature-card, .intro-section').forEach(el => {
+    // Observe sections but exclude the prediction form
+    document.querySelectorAll('.feature-card, .intro-section, .results-section').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -61,14 +61,19 @@ function addScrollAnimations() {
 // ===========================
 async function loadCropsData() {
     try {
+        console.log('Loading crops data...');
         showConnectionStatus('connected');
         const response = await fetch('/api/crops');
         const result = await response.json();
         
+        console.log('Crops data received:', result);
+        
         if (result.success) {
             cropsData = result.data;
+            console.log('Crops loaded:', cropsData);
             populateCropDropdown();
         } else {
+            console.error('Failed to load crops:', result);
             showError('Failed to load crops data');
         }
     } catch (error) {
@@ -83,15 +88,24 @@ async function loadCropsData() {
 // ===========================
 function populateCropDropdown() {
     const cropSelect = document.getElementById('crop');
+    if (!cropSelect) {
+        console.error('Crop select element not found!');
+        return;
+    }
+    
     cropSelect.innerHTML = '<option value="">-- Choose a crop --</option>';
     
     const sortedCrops = Object.keys(cropsData).sort();
+    console.log('Populating crops:', sortedCrops);
+    
     sortedCrops.forEach(crop => {
         const option = document.createElement('option');
         option.value = crop;
         option.textContent = crop;
         cropSelect.appendChild(option);
     });
+    
+    console.log('Crop dropdown populated with', sortedCrops.length, 'crops');
 }
 
 // ===========================
@@ -100,14 +114,23 @@ function populateCropDropdown() {
 function populateStateDropdown(crop) {
     const stateSelect = document.getElementById('state');
     
+    if (!stateSelect) {
+        console.error('State select element not found!');
+        return;
+    }
+    
+    console.log('Populating states for crop:', crop);
+    
     if (!crop || !cropsData[crop]) {
         stateSelect.innerHTML = '<option value="">-- First select a crop --</option>';
         stateSelect.disabled = true;
+        console.log('No crop selected or crop not found in data');
         return;
     }
     
     stateSelect.innerHTML = '<option value="">-- Choose a state --</option>';
     const states = cropsData[crop];
+    console.log('Available states:', states);
     
     states.forEach(state => {
         const option = document.createElement('option');
@@ -117,28 +140,41 @@ function populateStateDropdown(crop) {
     });
     
     stateSelect.disabled = false;
+    console.log('State dropdown populated with', states.length, 'states');
 }
 
 // ===========================
 // Setup Event Listeners
 // ===========================
 function setupEventListeners() {
+    const cropSelect = document.getElementById('crop');
+    const predictionForm = document.getElementById('predictionForm');
+    
+    if (!cropSelect || !predictionForm) {
+        console.error('Form elements not found!');
+        return;
+    }
+    
     // Crop selection change
-    document.getElementById('crop').addEventListener('change', function() {
+    cropSelect.addEventListener('change', function() {
+        console.log('Crop changed to:', this.value);
         populateStateDropdown(this.value);
     });
     
     // Form submission
-    document.getElementById('predictionForm').addEventListener('submit', handleFormSubmit);
+    predictionForm.addEventListener('submit', handleFormSubmit);
     
     // Form reset
-    document.getElementById('predictionForm').addEventListener('reset', function() {
+    predictionForm.addEventListener('reset', function() {
+        console.log('Form reset');
         hideResults();
         hideError();
         const stateSelect = document.getElementById('state');
         stateSelect.innerHTML = '<option value="">-- First select a crop --</option>';
         stateSelect.disabled = true;
     });
+    
+    console.log('Event listeners setup complete');
 }
 
 // ===========================

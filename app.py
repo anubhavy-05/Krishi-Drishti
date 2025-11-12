@@ -55,38 +55,43 @@ def train_and_save_crop_model(full_df, crop_name, state_name):
     return True
 
 def initialize_models():
-    """Initialize all models on app startup."""
+    """Check if data file exists. Models will be trained on-demand."""
     print("="*70)
-    print("INITIALIZING MODELS...")
+    print("KRISHI DRISHTI - STARTING UP")
     print("="*70)
     
     if not os.path.exists(DATA_FILE):
         print(f"Error: {DATA_FILE} not found!")
         return False
     
-    full_dataset = pd.read_csv(DATA_FILE)
-    
-    for crop, states in SUPPORTED_CROPS_AND_STATES.items():
-        for state in states:
-            model_file = f"{crop.lower()}_{state.lower().replace(' ', '_')}_price_model.joblib"
-            if not os.path.exists(model_file):
-                train_and_save_crop_model(full_dataset, crop, state)
-            else:
-                print(f"Model for {crop} in {state} already exists.")
-    
-    print("="*70)
-    print("ALL MODELS READY")
+    print(f"✓ Data file found: {DATA_FILE}")
+    print("✓ Models will be trained on first prediction request")
     print("="*70)
     return True
 
+def get_or_train_model(crop_name, state_name):
+    """Load existing model or train a new one if it doesn't exist."""
+    model_file = f"{crop_name.lower()}_{state_name.lower().replace(' ', '_')}_price_model.joblib"
+    
+    if os.path.exists(model_file):
+        print(f"Loading existing model for {crop_name} in {state_name}")
+        return joblib.load(model_file)
+    
+    print(f"Training new model for {crop_name} in {state_name}...")
+    full_dataset = pd.read_csv(DATA_FILE)
+    success = train_and_save_crop_model(full_dataset, crop_name, state_name)
+    
+    if success:
+        return joblib.load(model_file)
+    return None
+
 def predict_crop_price(crop_name, state_name, prediction_date, rainfall, demand):
     """Predicts the price using the trained model."""
-    model_filename = f"{crop_name.lower()}_{state_name.lower().replace(' ', '_')}_price_model.joblib"
     
-    try:
-        model = joblib.load(model_filename)
-    except FileNotFoundError:
-        return None, f"Model file '{model_filename}' not found."
+    # Load or train model on-demand
+    model = get_or_train_model(crop_name, state_name)
+    if model is None:
+        return None, f"Could not load/train model for {crop_name} in {state_name}"
     
     try:
         df_hist_full = pd.read_csv(DATA_FILE)
