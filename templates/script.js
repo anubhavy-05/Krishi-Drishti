@@ -66,30 +66,25 @@ function addScrollAnimations() {
 // ===========================
 // Load Crops Data from API
 // ===========================
-async function loadCropsData() {
+// This function now uses the hard-coded cropsData variable
+function loadCropsData() {
     try {
-        console.log('Loading crops data...');
-        showConnectionStatus('connected');
-        const response = await fetch('/api/crops');
-        const result = await response.json();
-        
-        console.log('Crops data received:', result);
-        
-        if (result.success) {
-            cropsData = result.data;
-            console.log('Crops loaded:', cropsData);
-            populateCropDropdown();
+        console.log('Using hard-coded crops data...');
+        // Check if the cropsData variable has anything in it
+        if (Object.keys(cropsData).length > 0) {
+            populateCropDropdown(); // This will now work
+            showConnectionStatus('connected');
+            console.log('Crops loaded from local variable.');
         } else {
-            console.error('Failed to load crops:', result);
-            showError('Failed to load crops data');
+            // This will run if your cropsData variable is still empty
+            console.error('cropsData variable is empty!');
+            showError('Failed to load crops data (hard-coded).');
         }
     } catch (error) {
-        console.error('Error loading crops:', error);
-        showError('Failed to connect to server. Please check your connection.');
-        showConnectionStatus('disconnected');
+        console.error('Error in loadCropsData:', error);
+        showError('A script error occurred while loading crop data.');
     }
 }
-
 // ===========================
 // Populate Crop Dropdown
 // ===========================
