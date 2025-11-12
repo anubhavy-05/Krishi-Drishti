@@ -1,55 +1,49 @@
-# Crop Price Prediction System
-A machine learning-based application that predicts crop prices for various crops across different Indian states.
+# 🌾 Krishi Drishti - Crop Price Prediction System
 
-# Overview
-This Python application uses a Random Forest regression model to predict crop prices based on historical data, rainfall, and market demand. The system supports multiple crops across different states and provides an interactive command-line interface for predictions.
-## 🎯 Objectives  
+A machine learning-based web application that predicts crop prices for various crops across different Indian states using advanced Random Forest algorithms.
 
-Main objective:  **ML model design and deploy** a machine learning model that  **predict future market price of sfecific agricultural commodities**   
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+---
+
+## 📋 Overview
+
+Krishi Drishti is a full-stack web application that uses machine learning to predict crop prices based on historical data, rainfall, and market demand. The system supports 8 major crops across multiple Indian states and provides an intuitive web interface for making predictions.
+
+### 🎯 Main Objective
+**Design and deploy** a machine learning model that **predicts future market prices of specific agricultural commodities** to help farmers, traders, and policymakers make informed decisions.   
 
 ### Sub-objectives:  
-- 📊 **Data Aggregation**: To collect and consolidate a comprehensive dataset from various sources, including historical market prices, weather data, crop production statistics, and economic indicators.  
-- ⚙️ **Feature Engineering**: To identify and engineer the most influential features that drive price fluctuations in agricultural commodities..  
-- 🤖 **Model Development**: To train, test, and evaluate multiple machine learning algorithms to find the most accurate and reliable model for price forecasting.  
-- 🔗 **System Implementation**: To create a functional pipeline from data ingestion to prediction output, which can be accessed through a user-friendly interface or an API.  
-- 💡 **Actionable Insights**: To provide predictions that help farmers decide the best time to sell their produce, assist traders in making informed purchasing decisions, and aid policymakers in managing food security.  
+- 📊 **Data Aggregation**: Collect and consolidate comprehensive datasets from various sources
+- ⚙️ **Feature Engineering**: Identify influential features that drive price fluctuations
+- 🤖 **Model Development**: Train and evaluate ML algorithms for accurate price forecasting
+- 🔗 **System Implementation**: Create a functional pipeline with a user-friendly web interface
+- 💡 **Actionable Insights**: Help farmers, traders, and policymakers make informed decisions
 
 ---
 
-## 📍 Scope 
--The scope of this project defines the boundaries and specific deliverables.
+## ✨ Features
 
-### ✅ In-Scope:  
-- **Commodities**: The model will initially focus on a select set of major commodities relevant to the Indian context, such as Wheat, Rice, Pulses (e.g., Tur), and Onions. The framework will be designed to be extensible to other commodities. 
-- **Region**: Indian mandis (Agmarknet data).  
-- **Prediction Horizon**:The model will focus on short-to-medium term predictions, ranging from 7 days to 30 days in advance. This is the most critical timeframe for farmers and local traders.  
-- **Users**: Farmers, traders, cooperatives, govt. departments.  
+### 🎯 Core Capabilities
+- **Multi-crop Support**: Predicts prices for 8 different crops (Wheat, Paddy, Sugarcane, Maize, Arhar, Moong, Cotton, Mustard)
+- **State-specific Models**: Separate trained models for each crop-state combination (24 models total)
+- **Web Interface**: Modern, responsive web UI for easy access from any device
+- **Real-time Predictions**: Instant price predictions based on user inputs
+- **Auto Keep-Alive**: Prevents Render's 15-minute timeout with automatic health checks
+- **Data-Driven**: Uses historical prices, weather data, and market demand patterns
+- **Time-series Features**: Incorporates temporal patterns including moving averages and seasonal trends
 
-### ❌ Out-of-Scope:  
-- Automated trading system.  
-- Global exchange price predictions.  
-- Black swan events (pandemic, war, etc.).  
+### 🌐 Web Application Features
+- � **Beautiful UI**: Modern gradient design with smooth animations
+- � **Mobile Responsive**: Works seamlessly on phones, tablets, and desktops
+- 🔄 **Dynamic Forms**: Smart dropdowns that update based on crop selection
+- � **Visual Results**: Clear display of predictions with detailed breakdown
+- ⚡ **Fast Performance**: Optimized for quick predictions and low latency
+- 🔌 **Connection Monitor**: Real-time server connection status indicator
 
 ---
 
-# Features
-- 🎯 Multi-crop Support: Predicts prices for 8 different crops
-
-- 🗺️ State-specific Models: Trains separate models for each crop-state combination
-
-- 📊 Interactive Interface: User-friendly command-line interface for predictions
-
-- 🔄 Data Generation: Automatically creates placeholder data for demonstration
-
-- 💾 Model Persistence: Saves trained models for future use
-
-- 📈 Time-series Features: Incorporates temporal patterns in pricing data
-
-- 🧹 Auto-cleanup: Removes generated files after session completion
-
-# Crop Price Prediction System Overview
-
-This document provides an overview of supported crops, their corresponding states, and their base prices.
+## 📊 Supported Crops & States
 
 | Crop      | Supported States                            | Base Price (₹/quintal) |
 |-----------|---------------------------------------------|------------------------|
@@ -61,83 +55,327 @@ This document provides an overview of supported crops, their corresponding state
 | Moong     | Rajasthan, Madhya Pradesh                   | 6,800                  |
 | Cotton    | Gujarat, Maharashtra, Punjab                | 7,500                  |
 | Mustard   | Rajasthan, Madhya Pradesh                   | 5,500                  |
-# Installation
-1. **Ensure you have Python 3.7+ installed**
 
-2. **Install the required dependencies:**
+---
 
-``` bash
+## 🚀 Deployment Guide
 
-pip install pandas numpy scikit-learn joblib
+### Option 1: Deploy to Render (Recommended)
+
+1. **Fork this repository** to your GitHub account
+
+2. **Click the Deploy to Render button** at the top of this README
+
+3. **Connect your GitHub repository** to Render
+
+4. Render will automatically:
+   - Detect the `render.yaml` configuration
+   - Install dependencies from `requirements.txt`
+   - Start the application using the `Procfile`
+   - Generate ML models on first startup
+
+5. **Access your app** at the provided Render URL (e.g., `https://krishi-drishti.onrender.com`)
+
+**Note**: The free tier on Render spins down after 15 minutes of inactivity. The app includes an automatic keep-alive mechanism that pings the server every 10 minutes when the page is open to prevent this.
+
+### Option 2: Manual Render Deployment
+
+1. Create a new Web Service on [Render](https://render.com)
+2. Connect your GitHub repository
+3. Configure the service:
+   - **Name**: `krishi-drishti`
+   - **Environment**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app`
+4. Deploy!
+
+---
+
+## 💻 Local Development
+
+### Prerequisites
+- Python 3.8 or higher
+- pip (Python package manager)
+
+### Installation Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/anubhavy-05/Krishi-Drishti.git
+   cd Krishi-Drishti
+   ```
+
+2. **Create a virtual environment** (optional but recommended)
+   ```bash
+   python -m venv venv
+   
+   # On Windows
+   venv\Scripts\activate
+   
+   # On macOS/Linux
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the application**
+   ```bash
+   python app.py
+   ```
+
+5. **Open your browser** and navigate to:
+   ```
+   http://localhost:5000
+   ```
+
+### First Run
+On the first run, the application will:
+- Load the crop data from `all_crop_data.csv`
+- Train ML models for all crop-state combinations
+- Save trained models as `.joblib` files
+- This may take 2-3 minutes
+
+---
+
+## 🏗️ Project Structure
+
+```
+Krishi-Drishti/
+│
+├── app.py                      # Flask backend application
+├── main3.py                    # Original CLI-based prediction script
+├── more-advance-prediction.py  # Advanced prediction logic
+│
+├── templates/
+│   └── index.html              # Main web interface
+│
+├── static/
+│   ├── css/
+│   │   └── styles.css          # Stylesheet with responsive design
+│   └── js/
+│       └── script.js           # Frontend logic & API calls
+│
+├── all_crop_data.csv           # Historical crop price data (20,000+ rows)
+├── combined_crop_data.csv      # Additional dataset
+│
+├── requirements.txt            # Python dependencies
+├── Procfile                    # Render/Heroku deployment config
+├── render.yaml                 # Render infrastructure-as-code
+├── .gitignore                  # Git ignore rules
+│
+└── README.md                   # This file
 ```
 
-# Usage
-1.**Run the application:**
+---
 
-```bash
-python crop_price_prediction.py
+## 🔌 API Endpoints
+
+### 1. Get Supported Crops
+```http
+GET /api/crops
 ```
-2.**Follow the interactive prompts:**
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "Wheat": ["Uttar Pradesh", "Punjab", "Madhya Pradesh"],
+    "Paddy": ["West Bengal", "Punjab", "Uttar Pradesh"],
+    ...
+  }
+}
+```
 
- Select a crop from the available options
+### 2. Predict Crop Price
+```http
+POST /api/predict
+Content-Type: application/json
 
-Choose a state where that crop is supported
+{
+  "crop": "Wheat",
+  "state": "Punjab",
+  "date": "2024-12-01",
+  "rainfall": 25.5,
+  "demand": 650
+}
+```
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "crop": "Wheat",
+    "state": "Punjab",
+    "date": "2024-12-01",
+    "rainfall": 25.5,
+    "demand": 650,
+    "predicted_price": 2234.56
+  }
+}
+```
 
-Enter a prediction date in YYYY-MM-DD format
+### 3. Health Check (Keep-Alive)
+```http
+GET /api/health
+```
+**Response:**
+```json
+{
+  "success": true,
+  "status": "healthy",
+  "timestamp": "2024-11-13T10:30:00.000000"
+}
+```
 
-Provide rainfall (in mm) and demand values
+---
 
-3.**The system will display the predicted price in ₹ per quintal**
+## 🤖 How It Works
 
-4.**Type 'quit' to exit the program**
+### Machine Learning Pipeline
 
-# How It Works
-## Data Generation
-- The system generates synthetic data for demonstration purposes, including:
+1. **Data Loading**: Historical crop price data with weather and demand information
+2. **Feature Engineering**:
+   - Temporal features: month, day of week
+   - Moving averages: 7-day rolling average of prices
+   - Input features: rainfall, demand
+3. **Model Training**: Random Forest Regressor with 100 estimators
+4. **Prediction**: Uses trained models to predict future prices
+5. **State Management**: Models are saved and reloaded for fast predictions
 
-- Historical price data with realistic trends
+### Model Architecture
+- **Algorithm**: Random Forest Regressor
+- **Features**: 
+  - `Rainfall` (mm)
+  - `Demand` (market demand value)
+  - `month` (1-12)
+  - `day_of_week` (0-6)
+  - `moving_average_7_day` (7-day price average)
+- **Training Data**: 1000 days per crop-state combination
+- **Total Models**: 24 models (8 crops × 3 states average)
 
-- Rainfall and demand metrics
+---
 
-- State-specific price variations
+## 🎨 Web Interface Usage
 
-# Model Training
-- Uses Random Forest Regressor with 100 estimators
+1. **Select Crop**: Choose from 8 available crops
+2. **Select State**: Pick a state where the selected crop is grown
+3. **Enter Date**: Select the prediction date
+4. **Input Rainfall**: Enter expected rainfall in millimeters
+5. **Input Demand**: Enter market demand value
+6. **Click Predict**: Get instant price prediction in ₹ per quintal
 
-- Creates time-based features (month, day of week, moving averages)
+The interface will display:
+- Predicted price prominently
+- All input parameters for verification
+- Connection status (to monitor server availability)
 
-- Trains separate models for each crop-state combination
+---
 
-- Saves models as .joblib files for future use
+## 🔄 Keep-Alive Mechanism
 
-# Prediction
-- Loads the appropriate model based on crop and state
+To prevent Render's free tier from spinning down after 15 minutes of inactivity, the application includes:
 
-- Processes input features (date, rainfall, demand)
+- **Automatic Health Pings**: JavaScript pings `/api/health` every 10 minutes
+- **Visibility Detection**: Re-pings when browser tab becomes active
+- **Connection Monitor**: Visual indicator showing server connection status
+- **Graceful Handling**: Displays disconnection if server is unavailable
 
-- Returns a price prediction based on the trained model
-- ## Run and Script ##
-- to run this code we have to  use vs code `main.py`script from terminal:
- ```bash
- python main.py
- ```
+---
 
-#  File Structure
-- crop_price_prediction.py - Main application file
- 
-- all_crop_data.csv - Generated data file (created during execution)
+## 🛠️ Technologies Used
 
-- *.joblib files - Trained model files (created during execution)
+### Backend
+- **Flask**: Python web framework
+- **Flask-CORS**: Cross-Origin Resource Sharing
+- **scikit-learn**: Machine learning library
+- **pandas**: Data manipulation
+- **numpy**: Numerical computing
+- **joblib**: Model serialization
+- **gunicorn**: Production WSGI server
 
-# Model Details
-- Algorithm: Random Forest Regressor
+### Frontend
+- **HTML5**: Semantic markup
+- **CSS3**: Modern styling with gradients, animations
+- **JavaScript (ES6)**: Async/await, Fetch API
+- **Google Fonts**: Poppins font family
 
-- Features: Rainfall, Demand, Month, Day of week, 7-day moving average
+### Deployment
+- **Render**: Cloud hosting platform
+- **Git**: Version control
+- **GitHub**: Code repository
 
-- Training Data: 1000 days of synthetic data per crop-state combination
+---
 
-### Notes
-<details><summary>Details about my project in simple language</summary>
+## 📝 Notes & Disclaimers
+
+- **Synthetic Data**: The current implementation uses generated data for demonstration. For production use, replace with actual historical agricultural data from reliable sources like Agmarknet.
+- **Model Accuracy**: Predictions are based on historical patterns and should be used as guidance, not absolute truth.
+- **Free Tier Limitation**: Render's free tier may spin down after 15 minutes of inactivity, but the keep-alive mechanism minimizes this issue.
+- **First Load**: Initial deployment may take 2-3 minutes as models are trained on startup.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is for educational/demonstration purposes.
+
+---
+
+## 👨‍💻 Author
+
+**Anubhav** - [@anubhavy-05](https://github.com/anubhavy-05)
+
+---
+
+## 🙏 Acknowledgments
+
+- Historical crop price patterns based on Indian agricultural data
+- ML algorithms powered by scikit-learn
+- Inspired by the need to empower farmers with data-driven insights
+
+---
+
+## 📧 Contact & Support
+
+For questions, issues, or suggestions:
+- Open an issue on GitHub
+- Review the documentation above thoroughly before raising issues
+
+---
+
+## 🔮 Future Enhancements
+
+- [ ] Integration with real-time agricultural data APIs
+- [ ] Additional features like temperature, soil conditions
+- [ ] Historical price visualization charts
+- [ ] Export predictions to PDF/Excel
+- [ ] Multi-language support (Hindi, regional languages)
+- [ ] Mobile app version
+- [ ] Advanced ML models (LSTM, Prophet)
+- [ ] Weather API integration for automatic rainfall data
+
+---
+
+**⭐ If you find this project useful, please consider giving it a star on GitHub!**
+
+---
+
+<details><summary>📖 Detailed Project Documentation (Click to expand)</summary>
 # 🌾 Agricultural Commodities Price Prediction using Machine Learning  
 
 ## 📌 Introduction  
