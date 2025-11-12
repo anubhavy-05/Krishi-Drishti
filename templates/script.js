@@ -1,7 +1,14 @@
 // ===========================
 // Global Variables
 // ===========================
-let cropsData = {};
+// Sample data for crops and their states
+let cropsData = {
+    "Paddy": ["Punjab", "West Bengal", "Uttar Pradesh", "Andhra Pradesh"],
+    "Wheat": ["Uttar Pradesh", "Punjab", "Haryana", "Madhya Pradesh"],
+    "Cotton": ["Gujarat", "Maharashtra", "Telangana", "Rajasthan"],
+    "Maize": ["Karnataka", "Madhya Pradesh", "Bihar"],
+    "Sugarcane": ["Uttar Pradesh", "Maharashtra", "Karnataka"]
+};
 let keepAliveInterval = null;
 
 // ===========================
