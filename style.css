@@ -1,8 +1,0 @@
-/* Minimal styling for project docs */
-body { font-family: Arial, sans-serif; line-height: 1.6; margin: 1.5rem; color: #222; }
-header { margin-bottom: 1rem; }
-header h1 { margin: 0; color: #2b7a78; }
-section { margin-bottom: 1rem; padding: 0.6rem; border-left: 4px solid #2b7a78; background: #f7fbfb; }
-code { background: #eef6f6; padding: 0.1rem 0.3rem; border-radius: 3px; }
-footer { margin-top: 2rem; font-size: 0.9rem; color: #555; }
-a { color: #2b7a78; }
